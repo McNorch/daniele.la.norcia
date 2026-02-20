@@ -765,7 +765,9 @@
       aspect-ratio: auto;
       min-height: 280px;
     }
-    .project-card {
+   .project-card {
+      display: flex;
+      flex-direction: column;
       aspect-ratio: auto;
       height: auto;
       min-height: unset;
@@ -776,11 +778,27 @@
       min-height: unset;
     }
 
+    /* Image area fixed height on mobile */
+    .project-thumb {
+      position: relative;
+      height: 200px;
+      flex-shrink: 0;
+    }
+
+    /* Play button moved so it doesn't overlap title */
+    .play-btn {
+      top: 0.8rem;
+      left: 0.8rem;
+    }
+
+    /* Info pulled out of absolute positioning */
     .project-info {
       position: relative;
       padding: 1rem;
-      background: rgba(8,8,8,0.85);
-   .project-desc {
+      background: var(--black);
+    }
+
+    .project-desc {
       font-size: 0.75rem;
       max-width: 100%;
     }
