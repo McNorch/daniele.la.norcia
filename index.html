@@ -435,6 +435,9 @@
     background: var(--border);
     margin-top: 4rem;
   }
+  .skill-block:last-child {
+    grid-column: span 1;
+  }
   .skill-block {
     background: var(--black);
     padding: 2.5rem;
@@ -645,6 +648,27 @@
   }
   .dot.active { background: var(--accent); transform: scale(1.3); }
 
+  /* AWARD BADGE */
+  .award-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(8,8,8,0.75);
+    border: 1px solid var(--accent);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    backdrop-filter: blur(8px);
+    max-width: 300px;
+  }
+  .award-icon { font-size: 0.9rem; flex-shrink: 0; }
+
   /* PLAY BUTTON */
   .play-btn {
     position: absolute;
@@ -769,13 +793,7 @@
 <!-- BIO -->
 <section class="bio-section" id="bio">
   <div class="bio-portrait reveal">
-    <div class="bio-portrait-placeholder">
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="30" cy="22" r="12" stroke="#6b6860" stroke-width="1.5"/>
-        <path d="M8 52c0-12.15 9.85-22 22-22s22 9.85 22 22" stroke="#6b6860" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <span>Your photo here</span>
-    </div>
+    <img src="portrait.jpg" alt="Daniele La Norcia" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
     <div class="bio-frame"></div>
   </div>
 
@@ -839,6 +857,10 @@
       </div>
 
       <!-- Video modal trigger -->
+      <div class="award-badge reveal">
+        <span class="award-icon">🏆</span>
+        <span>PICO 2025 Store Awards — Nominated Best Sim Game</span>
+      </div>
       <button class="play-btn" id="vrider-play">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Watch Trailer
@@ -882,30 +904,58 @@
       </div>
     </div>
 
-    <!-- Project 3 placeholder -->
-    <div class="project-card reveal">
-      <div class="project-thumb">
-        <div class="project-thumb-bg g3"></div>
+    <!-- Assetto Corsa Mobile -->
+    <div class="project-card reveal" id="ac-card">
+      <div class="slideshow">
+        <div class="slide active" style="background-image:url('ac_screen1.png')"></div>
+        <div class="slide" style="background-image:url('ac_screen2.png')"></div>
+        <div class="slide" style="background-image:url('ac_screen3.png')"></div>
+        <div class="slide" style="background-image:url('ac_screen4.png')"></div>
       </div>
+      <div class="slide-overlay"></div>
+      <div class="slide-dots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+      </div>
+      <button class="play-btn" id="ac-play">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Watch Trailer
+      </button>
       <div class="project-info">
-        <div class="project-genre">Coming Soon</div>
-        <div class="project-name">Next Project</div>
-        <div class="project-desc">More projects coming soon.</div>
+        <div class="project-genre">Racing Sim — Producer & Lead Designer</div>
+        <div class="project-name">Assetto Corsa Mobile</div>
+        <div class="project-desc">A highly ambitious B2B project for 505 Games — pushing the limits of racing simulation on mobile. Working alongside extraordinary professionals on a large-scale production, navigating complex technical and licensing challenges to bring one of PC racing's most respected IPs to iOS.</div>
         <div class="project-tags">
-          <span class="tag">TBA</span>
+          <span class="tag">iOS</span>
+          <span class="tag">505 Games</span>
+          <span class="tag">B2B</span>
+          <span class="tag">2021</span>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- VIDEO MODAL -->
+  <!-- VIDEO MODAL — VRider -->
   <div class="video-modal" id="video-modal">
     <div class="video-modal-backdrop" id="modal-backdrop"></div>
     <div class="video-modal-content">
       <button class="modal-close" id="modal-close">✕</button>
       <video id="vrider-video" controls playsinline>
         <source src="vrider.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- VIDEO MODAL — Assetto Corsa -->
+  <div class="video-modal" id="ac-modal">
+    <div class="video-modal-backdrop" id="ac-modal-backdrop"></div>
+    <div class="video-modal-content">
+      <button class="modal-close" id="ac-modal-close">✕</button>
+      <video id="ac-video" controls playsinline>
+        <source src="ac_trailer.mp4" type="video/mp4">
       </video>
     </div>
   </div>
@@ -922,67 +972,78 @@
     <div class="skill-block reveal">
       <div class="skill-icon">🎮</div>
       <div class="skill-name">Game Direction</div>
-      <div class="skill-desc">Defining the creative vision, designing systems and mechanics, artistic and narrative oversight from start to finish.</div>
+      <div class="skill-desc">Defining and maintaining creative vision across the full development cycle. Designing game systems, mechanics and player experience — always anchored to the question: how will this make the player feel?</div>
       <div class="skill-tools">
         <span class="skill-tool">Creative Vision</span>
         <span class="skill-tool">Game Design</span>
-        <span class="skill-tool">Narrative Design</span>
-        <span class="skill-tool">Level Design</span>
+        <span class="skill-tool">Systems Design</span>
+        <span class="skill-tool">Player Experience</span>
       </div>
     </div>
     <div class="skill-block reveal">
       <div class="skill-icon">📋</div>
       <div class="skill-name">Production</div>
-      <div class="skill-desc">Sprint planning, backlog management, cross-team coordination, budget tracking and milestone delivery.</div>
+      <div class="skill-desc">Managing the full production lifecycle from prototype to ship. Sprint planning, backlog management, cross-team coordination, budget tracking and milestone delivery — keeping all moving parts in sync under pressure.</div>
       <div class="skill-tools">
         <span class="skill-tool">Agile / Scrum</span>
         <span class="skill-tool">Jira</span>
-        <span class="skill-tool">Notion</span>
+        <span class="skill-tool">Smartsheet</span>
         <span class="skill-tool">Scheduling</span>
       </div>
     </div>
     <div class="skill-block reveal">
       <div class="skill-icon">👥</div>
       <div class="skill-name">Team Leadership</div>
-      <div class="skill-desc">Building and managing multidisciplinary teams. Constructive feedback, conflict resolution, motivation and people growth.</div>
+      <div class="skill-desc">Building and guiding multidisciplinary teams — from small indie units to 20+ person operations. Focused on creating the conditions where talented people do their best work.</div>
       <div class="skill-tools">
         <span class="skill-tool">Hiring</span>
         <span class="skill-tool">Mentoring</span>
-        <span class="skill-tool">Workshops</span>
-        <span class="skill-tool">Reviews</span>
+        <span class="skill-tool">Stakeholder Mgmt</span>
+        <span class="skill-tool">B2B Relations</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">Prototyping</div>
+      <div class="skill-desc">Turning concepts into playable ideas fast — whether on paper, in Unity, or with custom tools. Prototyping is where creative risks get taken cheaply and the best ideas prove themselves before a single sprint is planned.</div>
+      <div class="skill-tools">
+        <span class="skill-tool">Unity</span>
+        <span class="skill-tool">Paper Prototyping</span>
+        <span class="skill-tool">Rapid Iteration</span>
+        <span class="skill-tool">Playtesting</span>
       </div>
     </div>
     <div class="skill-block reveal">
       <div class="skill-icon">🔧</div>
       <div class="skill-name">Engine & Tools</div>
-      <div class="skill-desc">Familiarity with major engines and tools in the development pipeline. Focus on technical understanding to support the team.</div>
+      <div class="skill-desc">Hands-on familiarity with the development pipeline — enough to communicate fluently with engineers, spot bottlenecks early and make informed technical decisions alongside the team.</div>
       <div class="skill-tools">
-        <span class="skill-tool">Unreal Engine</span>
         <span class="skill-tool">Unity</span>
-        <span class="skill-tool">Perforce</span>
         <span class="skill-tool">Git</span>
+        <span class="skill-tool">Jira</span>
+        <span class="skill-tool">Smartsheet</span>
       </div>
     </div>
     <div class="skill-block reveal">
       <div class="skill-icon">📊</div>
       <div class="skill-name">Analytics & Market</div>
-      <div class="skill-desc">Reading and interpreting data to inform design decisions. Competitor analysis, positioning, market research.</div>
+      <div class="skill-desc">Using data to sharpen design and business decisions. Competitor analysis, KPI tracking, user research and playtesting — translating player behaviour into actionable insight.</div>
       <div class="skill-tools">
-        <span class="skill-tool">Data Analysis</span>
+        <span class="skill-tool">KPI Tracking</span>
         <span class="skill-tool">User Research</span>
         <span class="skill-tool">Playtesting</span>
-        <span class="skill-tool">KPI Tracking</span>
+        <span class="skill-tool">Competitor Analysis</span>
       </div>
     </div>
     <div class="skill-block reveal">
       <div class="skill-icon">🚀</div>
       <div class="skill-name">Launch & Go-To-Market</div>
-      <div class="skill-desc">Coordinating multi-platform launches, PR management, community building and post-launch live operations.</div>
+      <div class="skill-desc">End-to-end launch coordination across 6 platforms — from press kits and trailer direction to store listings, community management and post-launch live ops.</div>
       <div class="skill-tools">
-        <span class="skill-tool">Steam / Console</span>
-        <span class="skill-tool">Press Kit</span>
-        <span class="skill-tool">Trailer Direction</span>
-        <span class="skill-tool">Community</span>
+        <span class="skill-tool">Steam</span>
+        <span class="skill-tool">Meta Quest Store</span>
+        <span class="skill-tool">App Store / Play</span>
+        <span class="skill-tool">PSVR2 / Pico</span>
       </div>
     </div>
   </div>
@@ -994,17 +1055,18 @@
     <div class="section-label reveal">Contact</div>
     <div class="contact-big reveal">LET'S<br>BUILD<br><em>TOGETHER</em></div>
     <p class="reveal" style="margin-top:2rem;font-size:0.8rem;line-height:1.8;color:var(--muted);max-width:380px;">
-      Got a project in mind? Looking for a creative director or producer for your team? Write to me — I always reply.
+      Got a project in mind? Looking for a Game Director or Producer for your team? Write to me — I always reply.
     </p>
-    <a href="YOUR_RESUME.pdf" download class="resume-btn reveal">
+    <a href="Daniele_La_Norcia_CV.pdf" download class="resume-btn reveal">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download Resume
     </a>
-    <div class="social-links reveal" style="margin-top:2rem;">
-      <a href="#">LinkedIn</a>
-      <a href="#">Twitter / X</a>
-      <a href="#">Itch.io</a>
-      <a href="#">Email</a>
+    <p class="reveal" style="margin-top:1.5rem;font-size:0.8rem;color:var(--accent);letter-spacing:0.05em;">
+      <a href="/cdn-cgi/l/email-protection#c1a5a0afa8a4ada4efada0efafaeb3a2a8a081a6aca0a8adefa2aeac" style="color:var(--accent);text-decoration:none;"><span class="__cf_email__" data-cfemail="8eeaefe0e7ebe2eba0e2efa0e0e1fcede7efcee9e3efe7e2a0ede1e3">[email&#160;protected]</span></a>
+    </p>
+    <div class="social-links reveal" style="margin-top:1.2rem;">
+      <a href="https://www.linkedin.com/in/danielelanorcia" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/mcnorch/" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
   <div class="contact-form reveal">
@@ -1030,7 +1092,7 @@
   <p style="color:var(--muted)">Game Director & Producer — Based in Italy</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
@@ -1094,7 +1156,28 @@
   }
   closeBtn.addEventListener('click', closeModal);
   backdrop.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  // Video modal — Assetto Corsa
+  const acModal = document.getElementById('ac-modal');
+  const acVideo = document.getElementById('ac-video');
+  const acPlayBtn = document.getElementById('ac-play');
+  const acCloseBtn = document.getElementById('ac-modal-close');
+  const acBackdrop = document.getElementById('ac-modal-backdrop');
+
+  if (acPlayBtn) {
+    acPlayBtn.addEventListener('click', () => {
+      acModal.classList.add('open');
+      acVideo.play();
+    });
+  }
+  function closeAcModal() {
+    acModal.classList.remove('open');
+    acVideo.pause();
+    acVideo.currentTime = 0;
+  }
+  if (acCloseBtn) acCloseBtn.addEventListener('click', closeAcModal);
+  if (acBackdrop) acBackdrop.addEventListener('click', closeAcModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeAcModal(); } });
+
 
   // Add modal elements to cursor hover
   document.querySelectorAll('.play-btn, .modal-close, .dot').forEach(el => {
@@ -1112,5 +1195,7 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 </script>
-</body>
-</html>
+  <!-- AC VIDEO MODAL -->
+  <div class="video-modal" id="ac-modal">
+    <div class="video-modal-backdrop" id="ac-modal-backdrop"></div>
+  
