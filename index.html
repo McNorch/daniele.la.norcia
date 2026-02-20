@@ -770,6 +770,88 @@
   }
   .modal-close:hover { color: var(--white); }
 
+  /* ARCHIVE */
+  .archive-section { border-top: 1px solid var(--border); }
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    margin-top: 4rem;
+  }
+  .archive-card {
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .archive-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: grayscale(30%);
+  }
+  .archive-card:hover .archive-thumb {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+  .archive-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.1) 60%, transparent 100%);
+    transition: background 0.3s;
+  }
+  .archive-card:hover .archive-overlay {
+    background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.4) 60%, rgba(8,8,8,0.1) 100%);
+  }
+  .archive-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.2rem;
+  }
+  .archive-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .archive-meta {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .archive-meta span { color: var(--accent); margin-right: 0.5rem; }
+  .archive-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    border: 1px solid var(--accent2);
+    padding: 0.3rem 0.7rem;
+    background: rgba(8,8,8,0.6);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+  }
+  .archive-card:hover .archive-play-btn { opacity: 1; transform: translateY(0); }
+  .archive-play-btn:hover { background: var(--accent2); color: var(--white); }
+
+  @media (max-width: 900px) {
+    .archive-grid { grid-template-columns: 1fr; }
+    .archive-play-btn { opacity: 1; transform: translateY(0); }
+  }
+
   /* MOBILE PROJECT DETAIL OVERLAY */
   .mobile-project-overlay {
     display: none;
@@ -916,6 +998,7 @@
   <ul class="nav-links">
     <li><a href="#bio">About</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#archive">Archive</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -1125,6 +1208,57 @@
   </div>
 </section>
 
+<!-- ARCHIVE -->
+<section class="archive-section" id="archive">
+  <div class="reveal">
+    <div class="section-label">Earlier Work</div>
+    <h2 class="section-title">Archive</h2>
+  </div>
+
+  <div class="archive-grid">
+
+    <div class="archive-card reveal">
+      <img class="archive-thumb" src="1697263-driver-san-francisco-other-driver-san-francisco-keyart.jpg" alt="Driver: San Francisco" />
+      <div class="archive-overlay"></div>
+      <div class="archive-info">
+        <div class="archive-title">Driver: San Francisco</div>
+        <div class="archive-meta"><span>QA</span> PC / PS3 / Xbox 360 — 2011</div>
+        <button class="archive-play-btn" data-yt="https://www.youtube.com/embed/wPM_HOGnK0o?autoplay=1&rel=0">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Watch Trailer
+        </button>
+      </div>
+    </div>
+
+    <div class="archive-card reveal">
+      <img class="archive-thumb" src="jd3.png" alt="Just Dance 3" />
+      <div class="archive-overlay"></div>
+      <div class="archive-info">
+        <div class="archive-title">Just Dance 3</div>
+        <div class="archive-meta"><span>QA</span> Wii / PS3 / Xbox 360 — 2011</div>
+        <button class="archive-play-btn" data-yt="https://www.youtube.com/embed/kaiUiGRwsBo?autoplay=1&rel=0">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Watch Trailer
+        </button>
+      </div>
+    </div>
+
+    <div class="archive-card reveal">
+      <img class="archive-thumb" src="6018553-crackdown-2-xbox-360-front-cover.jpg" alt="Crackdown 2" />
+      <div class="archive-overlay"></div>
+      <div class="archive-info">
+        <div class="archive-title">Crackdown 2</div>
+        <div class="archive-meta"><span>QA</span> Xbox 360 — 2010</div>
+        <button class="archive-play-btn" data-yt="https://www.youtube.com/embed/jU70Kz2_mFU?autoplay=1&rel=0">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Watch Trailer
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section class="skills-section" id="skills">
   <div class="reveal">
@@ -1248,7 +1382,7 @@
       Download Resume
     </a>
     <p class="reveal" style="margin-top:1.5rem;font-size:0.85rem;color:var(--accent);letter-spacing:0.05em;">
-      <a href="mailto:daniele.la.norcia@gmail.com" style="color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;">daniele.la.norcia@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#94f0f5fafdf1f8f1baf8f5bafafbe6f7fdf5d4f3f9f5fdf8baf7fbf9" style="color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;"><span class="__cf_email__" data-cfemail="5034313e39353c357e3c317e3e3f2233393110373d31393c7e333f3d">[email&#160;protected]</span></a>
     </p>
     <div class="social-links reveal" style="margin-top:1.2rem;">
       <a href="https://www.linkedin.com/in/danielelanorcia" target="_blank" rel="noopener">LinkedIn</a>
@@ -1361,6 +1495,15 @@
   if (acCloseBtn) acCloseBtn.addEventListener('click', closeAcModal);
   if (acBackdrop) acBackdrop.addEventListener('click', closeAcModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeAcModal(); } });
+
+  // Archive trailer buttons — reuse VRider modal
+  document.querySelectorAll('.archive-play-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      iframe.src = btn.dataset.yt;
+      modal.classList.add('open');
+    });
+  });
 
 
   // Add modal elements to cursor hover
