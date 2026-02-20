@@ -430,6 +430,36 @@
     border: 1px solid var(--border);
     color: var(--muted);
   }
+  .tag-link {
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .tag-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .project-links {
+    margin-top: 0.8rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+  }
+  .project-card:hover .project-links { opacity: 1; transform: translateY(0); }
+  .project-yt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    text-decoration: none;
+    border: 1px solid var(--accent2);
+    padding: 0.3rem 0.7rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .project-yt-link:hover { background: var(--accent2); color: var(--white); }
 
   /* SKILLS */
   .skills-section { border-top: 1px solid var(--border); }
@@ -916,7 +946,7 @@
 <!-- BIO -->
 <section class="bio-section" id="bio">
   <div class="bio-portrait reveal">
-    <img src="portrait.jpeg" alt="Daniele La Norcia" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
+    <img src="portrait.jpg" alt="Daniele La Norcia" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
     <div class="bio-frame"></div>
   </div>
 
@@ -994,12 +1024,18 @@
         <div class="project-name">VRider SBK</div>
         <div class="project-desc">The official VR game of the World Superbike Championship. Built from a core team of 4 in prototyping to a 20+ person operation, shipped on 4 VR platforms within 12 months. From designing immersion-first VR game systems to pitching for funding and managing the full production lifecycle — this project is everything I love about this job.</div>
         <div class="project-tags">
-          <span class="tag">Meta Quest</span>
-          <span class="tag">PSVR2</span>
-          <span class="tag">SteamVR</span>
+          <a class="tag tag-link" href="https://www.meta.com/it-it/experiences/vrider-sbk/7219828628138236/" target="_blank" rel="noopener">Meta Quest</a>
+          <a class="tag tag-link" href="https://store.playstation.com/it-it/product/EP4200-PPSA28675_00-0371016237851868" target="_blank" rel="noopener">PSVR2</a>
+          <a class="tag tag-link" href="https://store.steampowered.com/app/3145740/VRider_SBK/" target="_blank" rel="noopener">SteamVR</a>
           <span class="tag">Pico</span>
           <span class="tag">Team 20+</span>
           <span class="tag">2024</span>
+        </div>
+        <div class="project-links">
+          <a class="project-yt-link" href="https://www.youtube.com/watch?v=eeKKUFo2TRA&t=2s" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+            Watch on YouTube
+          </a>
         </div>
       </div>
     </div>
@@ -1207,7 +1243,7 @@
       Download Resume
     </a>
     <p class="reveal" style="margin-top:1.5rem;font-size:0.85rem;color:var(--accent);letter-spacing:0.05em;">
-      <a href="mailto:daniele.la.norcia@gmail.com" style="color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;">daniele.la.norcia@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#94f0f5fafdf1f8f1baf8f5bafafbe6f7fdf5d4f3f9f5fdf8baf7fbf9" style="color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;"><span class="__cf_email__" data-cfemail="5034313e39353c357e3c317e3e3f2233393110373d31393c7e333f3d">[email&#160;protected]</span></a>
     </p>
     <div class="social-links reveal" style="margin-top:1.2rem;">
       <a href="https://www.linkedin.com/in/danielelanorcia" target="_blank" rel="noopener">LinkedIn</a>
@@ -1347,9 +1383,15 @@
       title: 'VRider SBK',
       desc: 'The official VR game of the World Superbike Championship. Built from a core team of 4 in prototyping to a 20+ person operation, shipped on 4 VR platforms within 12 months. From designing immersion-first VR game systems to pitching for funding and managing the full production lifecycle — this project is everything I love about this job.',
       tags: ['Meta Quest', 'PSVR2', 'SteamVR', 'Pico', 'Team 20+', '2024'],
+      tagLinks: {
+        'Meta Quest': 'https://www.meta.com/it-it/experiences/vrider-sbk/7219828628138236/',
+        'PSVR2': 'https://store.playstation.com/it-it/product/EP4200-PPSA28675_00-0371016237851868',
+        'SteamVR': 'https://store.steampowered.com/app/3145740/VRider_SBK/'
+      },
       images: ['vrider_keyart.jpg', 'vrider_3.jpg', 'vrider_screen1.jpg', 'vrider_screen2.jpg'],
       trailerId: 'video-modal',
       trailerVideoId: 'vrider-video',
+      youtubeUrl: 'https://www.youtube.com/watch?v=eeKKUFo2TRA&t=2s',
       award: '🏆 PICO 2025 Store Awards — Nominated Best Sim Game'
     },
     {
@@ -1394,9 +1436,12 @@
     overlayDesc.textContent = project.desc;
 
     // Tags
-    overlayTags.innerHTML = project.tags.map(t =>
-      `<span class="tag">${t}</span>`
-    ).join('');
+    overlayTags.innerHTML = project.tags.map(t => {
+      const url = project.tagLinks && project.tagLinks[t];
+      return url
+        ? `<a class="tag tag-link" href="${url}" target="_blank" rel="noopener">${t}</a>`
+        : `<span class="tag">${t}</span>`;
+    }).join('');
 
     // Award badge
     let actionsHTML = '';
@@ -1406,7 +1451,7 @@
 
     // Trailer button
     if (project.trailerId) {
-      actionsHTML += `<button class="mobile-overlay-trailer-btn" onclick="
+      actionsHTML += `<button class="mobile-overlay-trailer-btn" style="margin-bottom:0.8rem;" onclick="
         document.getElementById('mobile-project-overlay').classList.remove('open');
         setTimeout(() => {
           document.getElementById('${project.trailerId}').classList.add('open');
@@ -1417,6 +1462,15 @@
         Watch Trailer
       </button>`;
     }
+
+    // YouTube link
+    if (project.youtubeUrl) {
+      actionsHTML += `<a href="${project.youtubeUrl}" target="_blank" rel="noopener" class="project-yt-link" style="display:inline-flex;width:100%;justify-content:center;padding:0.9rem;box-sizing:border-box;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:0.6rem;"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+        Watch on YouTube
+      </a>`;
+    }
+
     overlayActions.innerHTML = actionsHTML;
 
     // Open
