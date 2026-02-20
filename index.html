@@ -740,72 +740,131 @@
   }
   .modal-close:hover { color: var(--white); }
 
+  /* MOBILE PROJECT DETAIL OVERLAY */
+  .mobile-project-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: var(--black);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .mobile-project-overlay.open { transform: translateX(0); }
+  .mobile-overlay-back {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+  }
+  .mobile-overlay-images {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mobile-overlay-images::-webkit-scrollbar { display: none; }
+  .mobile-overlay-image-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 260px;
+    background-size: cover;
+    background-position: center;
+    scroll-snap-align: start;
+  }
+  .mobile-overlay-body { padding: 2rem 1.5rem; }
+  .mobile-overlay-genre {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .mobile-overlay-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 1.2rem;
+  }
+  .mobile-overlay-desc {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text);
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .mobile-overlay-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .mobile-overlay-trailer-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+  }
+  .mobile-overlay-trailer-btn:hover { background: var(--white); }
+
   /* RESPONSIVE */
- @media (max-width: 900px) {
+  @media (max-width: 900px) {
     nav { padding: 1.2rem 1.5rem; }
     section { padding: 5rem 1.5rem; }
     .hero { padding: 0 1.5rem 5rem; }
-    .hero-scroll { right: 1.5rem; }
+    .hero-scroll { display: none; }
     .bio-section { grid-template-columns: 1fr; gap: 3rem; }
     .bio-portrait { max-height: 350px; }
     .bio-frame { display: none; }
     .projects-grid { grid-template-columns: 1fr; }
+    .project-card:first-child { grid-column: span 1; aspect-ratio: 16/9; }
     .skills-grid { grid-template-columns: 1fr; }
     .contact-section { grid-template-columns: 1fr; gap: 3rem; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
     .nav-links { display: none; }
 
-    /* Stack card as column: image on top, info below */
-    .project-card,
-    .project-card:first-child {
-      display: flex;
-      flex-direction: column;
-      aspect-ratio: auto;
-      height: auto;
-      overflow: visible;
-    }
-
-    /* Image fixed height */
-    .project-thumb {
-      position: relative;
-      height: 220px;
-      flex-shrink: 0;
-      width: 100%;
-    }
-
-    /* Info sits below the image, not on top of it */
-    .project-info {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      right: auto;
-      padding: 1.2rem;
-      background: var(--card);
-    }
-
-    /* Always show description and tags (no hover on touch) */
-    .project-desc,
-    .project-tags {
-      opacity: 1;
-      transform: translateY(0);
-      max-width: 100%;
-    }
-
-    .project-desc { font-size: 0.75rem; }
-
-    /* Move play button so it doesn't overlap the title */
-    .play-btn {
-      position: absolute;
-      top: 0.8rem;
-      left: 0.8rem;
-      z-index: 5;
-    }
-
-    /* Award badge stays inside the image area */
-    .award-badge {
-      position: absolute;
-      bottom: 0.8rem;
-      right: 0.8rem;
+    .mobile-project-overlay { display: block; }
+    .project-desc, .project-tags, .play-btn { display: none; }
+    .award-badge { font-size: 0.55rem; max-width: 180px; }
+    .project-card { cursor: pointer; }
+    .project-info::after {
+      content: 'TAP TO VIEW →';
+      display: block;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-top: 0.8rem;
     }
   }
 
@@ -1148,7 +1207,7 @@
       Download Resume
     </a>
     <p class="reveal" style="margin-top:1.5rem;font-size:0.85rem;color:var(--accent);letter-spacing:0.05em;">
-      <a href="mailto:daniele.la.norcia@gmail.com" style="color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;">daniele.la.norcia@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#94f0f5fafdf1f8f1baf8f5bafafbe6f7fdf5d4f3f9f5fdf8baf7fbf9" style="color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;"><span class="__cf_email__" data-cfemail="5034313e39353c357e3c317e3e3f2233393110373d31393c7e333f3d">[email&#160;protected]</span></a>
     </p>
     <div class="social-links reveal" style="margin-top:1.2rem;">
       <a href="https://www.linkedin.com/in/danielelanorcia" target="_blank" rel="noopener">LinkedIn</a>
@@ -1163,7 +1222,20 @@
   <p style="color:var(--muted)">Game Director & Producer — Based in Italy</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<!-- MOBILE PROJECT DETAIL OVERLAY -->
+<div class="mobile-project-overlay" id="mobile-project-overlay">
+  <button class="mobile-overlay-back" id="mobile-overlay-back">&#8592; Back to Projects</button>
+  <div class="mobile-overlay-images" id="mobile-overlay-images"></div>
+  <div class="mobile-overlay-body">
+    <div class="mobile-overlay-genre" id="mobile-overlay-genre"></div>
+    <div class="mobile-overlay-title" id="mobile-overlay-title"></div>
+    <div class="mobile-overlay-desc" id="mobile-overlay-desc"></div>
+    <div class="mobile-overlay-tags" id="mobile-overlay-tags"></div>
+    <div id="mobile-overlay-actions"></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
@@ -1261,12 +1333,114 @@
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
         setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
+
+  // MOBILE PROJECT OVERLAY
+  const projects = [
+    {
+      id: 'vrider-card',
+      genre: 'Official VR Racing Sim — Executive Producer & Game Director',
+      title: 'VRider SBK',
+      desc: 'The official VR game of the World Superbike Championship. Built from a core team of 4 in prototyping to a 20+ person operation, shipped on 4 VR platforms within 12 months. From designing immersion-first VR game systems to pitching for funding and managing the full production lifecycle — this project is everything I love about this job.',
+      tags: ['Meta Quest', 'PSVR2', 'SteamVR', 'Pico', 'Team 20+', '2024'],
+      images: ['vrider_keyart.jpg', 'vrider_3.jpg', 'vrider_screen1.jpg', 'vrider_screen2.jpg'],
+      trailerId: 'video-modal',
+      trailerVideoId: 'vrider-video',
+      award: '🏆 PICO 2025 Store Awards — Nominated Best Sim Game'
+    },
+    {
+      id: null,
+      genre: 'Official Mobile Racing — Producer & Game Director',
+      title: 'SBK OMG',
+      desc: 'The foundation stone for VRider SBK. A fun, fast-paced mobile racing experience built with tight time and budget constraints — and a highly motivated team that delivered beyond expectations.',
+      tags: ['iOS', 'Android', '2021'],
+      images: ['sbkOMG_keyart.jpg', 'sbkOMG_screen.jpg'],
+      trailerId: null
+    },
+    {
+      id: 'ac-card',
+      genre: 'Racing Sim — Producer & Lead Designer',
+      title: 'Assetto Corsa Mobile',
+      desc: 'A highly ambitious B2B project for 505 Games — pushing the limits of racing simulation on mobile. Working alongside extraordinary professionals on a large-scale production, navigating complex technical and licensing challenges to bring one of PC racing\'s most respected IPs to iOS.',
+      tags: ['iOS', '505 Games', 'B2B', '2021'],
+      images: ['ac_screen1.png', 'ac_screen2.png', 'ac_screen3.png', 'ac_screen4.png'],
+      trailerId: 'ac-modal',
+      trailerVideoId: 'ac-video'
+    }
+  ];
+
+  const overlay = document.getElementById('mobile-project-overlay');
+  const overlayBack = document.getElementById('mobile-overlay-back');
+  const overlayImages = document.getElementById('mobile-overlay-images');
+  const overlayGenre = document.getElementById('mobile-overlay-genre');
+  const overlayTitle = document.getElementById('mobile-overlay-title');
+  const overlayDesc = document.getElementById('mobile-overlay-desc');
+  const overlayTags = document.getElementById('mobile-overlay-tags');
+  const overlayActions = document.getElementById('mobile-overlay-actions');
+
+  function openMobileOverlay(project) {
+    // Images
+    overlayImages.innerHTML = project.images.map(src =>
+      `<div class="mobile-overlay-image-slide" style="background-image:url('${src}')"></div>`
+    ).join('');
+
+    // Text
+    overlayGenre.textContent = project.genre;
+    overlayTitle.textContent = project.title;
+    overlayDesc.textContent = project.desc;
+
+    // Tags
+    overlayTags.innerHTML = project.tags.map(t =>
+      `<span class="tag">${t}</span>`
+    ).join('');
+
+    // Award badge
+    let actionsHTML = '';
+    if (project.award) {
+      actionsHTML += `<p style="font-size:0.65rem;letter-spacing:0.1em;color:var(--accent);margin-bottom:1.2rem;">${project.award}</p>`;
+    }
+
+    // Trailer button
+    if (project.trailerId) {
+      actionsHTML += `<button class="mobile-overlay-trailer-btn" onclick="
+        document.getElementById('mobile-project-overlay').classList.remove('open');
+        setTimeout(() => {
+          document.getElementById('${project.trailerId}').classList.add('open');
+          document.getElementById('${project.trailerVideoId}').play();
+        }, 350);
+      ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Watch Trailer
+      </button>`;
+    }
+    overlayActions.innerHTML = actionsHTML;
+
+    // Open
+    overlay.classList.add('open');
+    overlay.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileOverlay() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  overlayBack.addEventListener('click', closeMobileOverlay);
+
+  // Attach tap listeners to each project card
+  document.querySelectorAll('.project-card').forEach((card, i) => {
+    card.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        openMobileOverlay(projects[i]);
+      }
+    });
+  });
+
 </script>
-  <!-- AC VIDEO MODAL -->
-  <div class="video-modal" id="ac-modal">
-    <div class="video-modal-backdrop" id="ac-modal-backdrop"></div>
-  
+</body>
+</html>
